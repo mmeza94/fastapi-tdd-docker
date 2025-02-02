@@ -47,6 +47,21 @@ def test_read_summary_incorrect_id(test_app_with_db):
     assert response.status_code == 404
     assert response.json()["detail"] == "Summary not found"
 
+    response = test_app_with_db.get("/summaries/0/")
+    assert response.status_code == 422
+    # assert response.json() == {
+    #     "detail": [
+    #         {
+    #             "ctx": {"gt": 0},
+    #             "input": "0",
+    #             "loc": ["path", "id"],
+    #             "msg": "Input should be greater than 0",
+    #             "type": "greater_than",
+    #             "url": "https://errors.pydantic.dev/2.5/v/greater_than",
+    #         }
+    #     ]
+    # }
+
 
 def test_read_all_summaries(test_app_with_db):
     response = test_app_with_db.post(
@@ -76,6 +91,21 @@ def test_remove_summary_incorrect_id(test_app_with_db):
     response = test_app_with_db.delete("/summaries/999/")
     assert response.status_code == 404
     assert response.json()["detail"] == "Summary not found"
+
+    response = test_app_with_db.delete("/summaries/0/")
+    assert response.status_code == 422
+    # assert response.json() == {
+    #     "detail": [
+    #         {
+    #             "ctx": {"gt": 0},
+    #             "input": "0",
+    #             "loc": ["path", "id"],
+    #             "msg": "Input should be greater than 0",
+    #             "type": "greater_than",
+    #             "url": "https://errors.pydantic.dev/2.5/v/greater_than",
+    #         }
+    #     ]
+    # }
 
 
 #region UPDATE TESTS
