@@ -3,8 +3,11 @@ from typing import List
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Path
 
 from app.api import crud
-from app.models.pydantic import (SummaryPayloadSchema, SummaryResponseSchema,
-                                 SummaryUpdatePayloadSchema)
+from app.models.pydantic import (
+    SummaryPayloadSchema,
+    SummaryResponseSchema,
+    SummaryUpdatePayloadSchema,
+)
 from app.models.tortoise import SummarySchema
 from app.summarizer import generate_summary
 
